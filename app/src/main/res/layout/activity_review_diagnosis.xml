@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright © 2020 NHSX. All rights reserved.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <include layout="@layout/white_banner" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/submit_diagnosis"
+        android:layout_below="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/page_6_of_6"
+                android:fontFamily="@font/roboto_medium"
+                android:letterSpacing="0.1"
+                android:paddingTop="24dp"
+                android:text="@string/progress_six_sixth"
+                android:textColor="@color/text_sub_title"
+                android:textSize="14sp" />
+
+            <uk.nhs.nhsx.sonar.android.app.widgets.AccessibilityTextView
+                style="@style/TextViewSubHead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/check_answers" />
+
+            <View
+                style="@style/HorizontalDivider"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/review_answer_temperature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/i_do_not_temperature"
+                android:textSize="16sp" />
+
+            <View
+                style="@style/HorizontalDivider"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/review_answer_cough"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/i_do_cough"
+                android:textSize="16sp" />
+
+            <View
+                style="@style/HorizontalDivider"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/review_answer_anosmia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/i_do_anosmia"
+                android:textSize="16sp" />
+
+            <View
+                style="@style/HorizontalDivider"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/review_answer_sneeze"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/i_do_sneeze"
+                android:textSize="16sp" />
+
+            <View
+                style="@style/HorizontalDivider"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/review_answer_stomach"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/i_do_stomach"
+                android:textSize="16sp" />
+
+            <View
+                style="@style/HorizontalDivider"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="48dp" />
+
+            <uk.nhs.nhsx.sonar.android.app.widgets.AccessibilityTextView
+                android:id="@+id/symptoms_date_prompt"
+                style="@style/TextViewSubHead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/symptoms_date_prompt_all" />
+
+
+            <uk.nhs.nhsx.sonar.android.app.widgets.ErrorView
+                android:id="@+id/date_selection_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:error_description="@string/date_selection_error" />
+
+            <Spinner
+                android:id="@+id/symptoms_date_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="56dp"
+                android:background="@drawable/spinner_background" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submit_diagnosis"
+        style="@style/PrimaryButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/continue_button" />
+
+
+</RelativeLayout>

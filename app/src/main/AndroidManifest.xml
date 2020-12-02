@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2020 NHSX. All rights reserved.
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="uk.nhs.nhsx.sonar.android.app">
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!--  Fine location needed for bluetooth on Android 9+ : https://developer.android.com/guide/topics/connectivity/bluetooth-le   -->
+    <!--  Our minimum is 26 at the moment   -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <application
+        android:name=".SonarApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".FlowTestStartActivity" />
+        <activity android:name=".debug.TesterActivity" />
+
+        <activity
+            android:name=".onboarding.MainOnboardingActivity"
+            android:label="@string/onboarding_title" />
+        <activity
+            android:name=".onboarding.ExplanationActivity"
+            android:label="@string/explanation_title" />
+        <activity
+            android:name=".onboarding.PostCodeActivity"
+            android:label="@string/post_code_title"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name=".onboarding.PermissionActivity"
+            android:label="@string/permission_title" />
+        <activity
+            android:name=".onboarding.EnableBluetoothActivity"
+            android:label="@string/enable_bluetooth_title" />
+        <activity
+            android:name=".onboarding.GrantLocationPermissionActivity"
+            android:label=" " />
+        <activity
+            android:name=".onboarding.EnableLocationActivity"
+            android:label="@string/enable_location_service_title" />
+
+        <activity
+            android:name=".edgecases.ReEnableBluetoothActivity"
+            android:label="@string/re_enable_bluetooth_title" />
+        <activity
+            android:name=".edgecases.ReAllowGrantLocationPermissionActivity"
+            android:label="@string/re_allow_location_permission_title" />
+        <activity
+            android:name=".edgecases.ReEnableLocationActivity"
+            android:label="@string/re_enable_location_title" />
+        <activity
+            android:name=".edgecases.DeviceNotSupportedActivity"
+            android:label="@string/device_not_supported_title" />
+        <activity
+            android:name=".edgecases.TabletNotSupportedActivity"
+            android:label="@string/tablet_support_title" />
+
+        <!-- Space character is used in the label to prevent accessibility manager from announcing app label
+             We have custom announcer in the activity itself -->
+        <activity
+            android:name=".status.StatusActivity"
+            android:label=" " />
+
+        <activity
+            android:name=".referencecode.ReferenceCodeActivity"
+            android:label="@string/reference_code_title" />
+
+        <activity
+            android:name=".diagnose.DiagnoseTemperatureActivity"
+            android:label=" " />
+        <activity
+            android:name=".diagnose.DiagnoseCoughActivity"
+            android:label=" " />
+        <activity
+            android:name=".diagnose.review.DiagnoseReviewActivity"
+            android:label="@string/check_answers" />
+        <activity
+            android:name=".diagnose.DiagnoseCloseActivity"
+            android:label="@string/you_do_not_have_symptoms" />
+        <activity
+            android:name=".diagnose.DiagnoseSubmitActivity"
+            android:label="@string/please_confirm_the_information" />
+        <activity
+            android:name=".diagnose.DiagnoseStomachActivity"
+            android:label=" " />
+        <activity
+            android:name=".diagnose.DiagnoseSneezeActivity"
+            android:label=" " />
+        <activity
+            android:name=".diagnose.DiagnoseAnosmiaActivity"
+            android:label=" " />
+
+        <activity
+            android:name=".interstitials.WorkplaceGuidanceActivity"
+            android:label="@string/latest_workplace_guidance" />
+        <activity
+            android:name=".interstitials.ApplyForTestActivity"
+            android:label="@string/apply_for_test_now" />
+        <activity
+            android:name=".interstitials.CurrentAdviceActivity"
+            android:label="@string/current_advice_title" />
+
+        <service
+            android:name=".ble.BluetoothService"
+            android:enabled="true" />
+
+        <service
+            android:name=".notifications.NotificationService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".receivers.BootCompletedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".receivers.PackageReplacedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".receivers.TurnBluetoothOnReceiver" />
+        <receiver android:name=".receivers.ServiceRestarterBroadcastReceiver" />
+        <receiver android:name=".notifications.reminders.ReminderBroadcastReceiver">
+
+        </receiver>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="uk.nhs.nhsx.sonar.android.app.exports"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+</manifest>
